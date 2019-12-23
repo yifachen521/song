@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.ShowVideoListDao">
+    <!--分页多条件查询-->
+    <select id="findVideoByCondition" resultType="Video">
+        SELECT video.id,title,detail,speaker.speakerName speakerId,time,playNum
+        from video
+        LEFT JOIN speaker
+        ON video.speakerId=speaker.id
+        <where>
+            <if test="speakerId!=null and speakerId !=''">
+
+                and video.speakerId=#{speakerId}
+            </if>
+            <if test="title!=null and title !=''">
+                and video.title like concat('%',#{title},'%')
+            </if>
+            <if test="courseId!=null and courseId !=''">
+                and video.courseId=#{courseId}
+            </if>
+        </where>
+        limit #{start},#{rows}
+    </select>
+
+    <select id="findTotalNumber" resultType="Integer">
+        SELECT count(1)
+        from video
+        LEFT JOIN speaker
+        ON video.speakerId=speaker.id
+        <where>
+            <if test="speakerId!=null and speakerId !=''">
+
+                and video.speakerId=#{speakerId}
+            </if>
+            <if test="title!=null and title !=''">
+                and video.title like concat('%',#{title},'%')
+            </if>
+            <if test="courseId!=null and courseId !=''">
+                and video.courseId=#{courseId}
+            </if>
+        </where>
+
+    </select>
+
+
+    <select id="findSpeakerList" resultType="Speaker">
+        select id,speakerName from speaker
+    </select>
+
+    <select id="findCourseList" resultType="Course">
+         select id,courseTitle from Course
+    </select>
+
+    <delete id="delVideoById">
+        delete from  video where id=#{id}
+    </delete>
+
+
+    <insert id="saveVideo">
+        insert  into video (title,detail,speakerId,courseId,time,imageUrl,videoUrl)
+        values(#{title},#{detail},#{speakerId},#{courseId},#{time},#{imageUrl},#{videoUrl})
+    </insert>
+
+    <select id="updateById" resultType="Video">
+        select id,title,detail,speakerId,courseId,time,imageUrl,videoUrl
+        from video where id=#{id}
+    </select>
+
+    <update id="updateSaveVideo">
+        update video set title=#{title},detail=#{detail},speakerId=#{speakerId},courseId=#{courseId},time=#{time},imageUrl=#{imageUrl},videoUrl=#{videoUrl}
+         where id=#{id}
+    </update>
+
+</mapper>
+

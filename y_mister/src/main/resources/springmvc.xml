@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+	    http://www.springframework.org/schema/aop/spring-aop.xsd
+	    http://www.springframework.org/schema/tx
+	    http://www.springframework.org/schema/tx/spring-tx.xsd
+	    ">
+
+    <!--配置扫描-->
+    <context:component-scan base-package="com.qf">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- 开启spring对mvc的支持（配置开启映射器和适配器）-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+    <!--配置视图映射器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="InternalResourceViewResolver">
+        <property name="suffix" value=".jsp"></property>
+        <!--        这个小杠杠一定要注意-->
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+    </bean>
+
+    <!--配置放行静态资源 两种方式：
+    使用了springmvc框架分析：
+    如果配置的DispatcherServlet的映射路径不为/时，对静态资源的请求最终会由tomcat的默认配置来处理，所以不影响静态资源的正常访问。
+    如果配置的DispatcherServlet的映射路径为/时,会覆盖掉tomcat的默认的default配置，所以需要在springmvc文件中进行配置，对静态资源进行放行。
+    -->
+    <!--<mvc:resources mapping="/js/**" location="/js/"></mvc:resources>-->
+
+    <mvc:default-servlet-handler default-servlet-name="default"></mvc:default-servlet-handler>
+
+    <!--配置拦截器拦截-->
+    <!--    <mvc:interceptors>-->
+    <!--        <mvc:interceptor>-->
+    <!--            <mvc:mapping path="/account/test_interceptor"/>-->
+    <!--            <bean class="com.song.interceptor.MyInterceptor"></bean>-->
+    <!--        </mvc:interceptor>-->
+    <!--    </mvc:interceptors>-->
+
+    <!--配置 multipartResolver名字是固定的 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--配置上传文件的大小-->
+        <property name="maxInMemorySize" value="10000000"></property>
+    </bean>
+
+</beans>

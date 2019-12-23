@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.BeforeUserDao">
+    <select id="UserLogin" resultType="User">
+        select  * from user where email=#{email} and password=#{password}
+    </select>
+
+    <update id="updateUserMsg" >
+        update user set nickName=#{nickName},address=#{address},sex=#{sex},birthday=#{birthday} where email=#{email}
+    </update>
+    <select id="findUser" resultType="User">
+        select  * from user where email=#{email}
+    </select>
+
+    <update id="updateUserImg">
+        update user set imgUrl=#{imgUrl} where id=#{id}
+    </update>
+
+    <update id="updateUserPwd">
+        update user set password=#{password}
+        <where>
+            <if test="id!=null">
+                 and id=#{id}
+            </if>
+            <if test="email!=null">
+                 and email=#{email}
+            </if>
+        </where>
+    </update>
+    <insert id="addUser">
+        insert into user (email,password)values (#{email},#{password})
+    </insert>
+</mapper>
+

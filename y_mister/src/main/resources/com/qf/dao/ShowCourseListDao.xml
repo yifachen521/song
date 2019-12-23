@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.ShowCourseListDao">
+    <select id="findAll" resultType="Course">
+        select * from course limit #{start},#{rows}
+    </select>
+    <select id="totalCourse" resultType="Integer">
+        select count(1) from course
+    </select>
+
+    <delete id="delCourseById">
+        delete from course where id=#{id}
+    </delete>
+
+    <insert id="addCourse">
+        insert into course (courseTitle,subjectId,courseDesc)values(#{courseTitle},#{subjectId},#{courseDesc})
+    </insert>
+
+    <select id="order" resultType="Subject">
+        select  * from subject
+    </select>
+
+    <select id="updateById" resultType="Course">
+         select  * from course where id=#{id}
+    </select>
+    <update id="updateSaveSubject">
+
+        update course set courseTitle=#{courseTitle},subjectId=#{subjectId},courseDesc=#{courseDesc} where  id=#{id}
+    </update>
+</mapper>
+

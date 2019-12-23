@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.BeforeIndexCourseDao">
+
+    <!--自定义映射-->
+
+    <!-- <resultMap id="subjectMapper" type="Subject">
+         <id property="id" column="id"></id>
+         <association property="courses" javaType="Course">
+             <id property="id" column="cid"></id>
+             <result property="courseDesc" column="courseDesc"></result>
+             <result property="courseTitle" column="courseTitle"></result>
+             <collection property="videos" ofType="Video">
+                 <id property="id" column="id"></id>
+                 <association property="speaker" javaType="Speaker">
+                     <id property="id" column="speakerId"></id>
+                 </association>
+             </collection>
+         </association>
+     </resultMap> -->
+
+    <select id="findCourseIdBySubjectId" resultType="Course">
+        select * from course where subjectId=#{id}
+    </select>
+    <select id="findVideoByCourseId" resultType="Video">
+        select * from video where courseId=#{id}
+    </select>
+    <select id="findSpeakerByVideoId" resultType="Speaker">
+        select * from speaker where id=#{id}
+    </select>
+    <select id="findById" resultType="Subject">
+      select * from subject where id=#{id}
+    </select>
+<!--自定义映射-->
+<!--    <resultMap id="videoMapper" type="Video">
+        <id column="id" property="id"></id>
+        <association property="speaker" javaType="Speaker">
+            <id property="id" column="id"></id>
+            <result column="speakerName" property="speakerName"></result>
+        </association>
+    </resultMap>-->
+
+    <select id="findVideoById" resultType="Video">
+        select * from video where id=#{id}
+    </select>
+    <select id="findCourseById" resultType="Course">
+        select * from course where id=#{id}
+    </select>
+</mapper>
+
