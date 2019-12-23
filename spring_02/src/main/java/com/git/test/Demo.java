@@ -16,5 +16,9 @@ public class Demo {
         System.out.println("jiji");
     }
 
+    public void  test3(){
+        System.out.println("lalal");
+    }
+
 
 }
