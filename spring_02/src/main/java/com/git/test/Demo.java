@@ -12,5 +12,9 @@ public class Demo {
     public void test(){
         System.out.println("jiji");
     }
+    public void test1(){
+        System.out.println("jiji");
+    }
+
 
 }
