@@ -51,7 +51,7 @@
     </select>
 
     <select id="findCourseList" resultType="Course">
-         select id,courseTitle from Course
+         select id,courseTitle from oursec
     </select>
 
     <delete id="delVideoById">
