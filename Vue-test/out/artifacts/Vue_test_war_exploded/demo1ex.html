@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>快速入门</title>
+	<script src="lib/vuejs-2.5.16.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{Msg}}<!--插值表达式-->
+			{{abc}}
+		</div>
+	</body>
+	<script>
+		//document.getElementById("app").innerHTML="小姐姐你好";
+	new Vue({
+		el:"#app",
+		data:{
+			Msg:"你好",
+			abc:"加个微信"
+		}
+
+	});
+	</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>v-on:click</title>
+    <script src="lib/vuejs-2.5.16.js"></script>
+</head>
+<body>
+<div id="app">
+    {{msg}}
+</div>
+  <button onclick="dianwo('晚安')">vue的onclick</button>
+
+</body>
+<script>
+    function dianwo() {
+       document.getElementById("app").innerText="在吗 小姐姐";
+    }
+/*   new Vue({
+       el:"#app",
+       data:{
+           msg:"在吗 小姐姐"
+       },
+       methods:{
+           dianwo:function (a) {
+              alert("洗澡去了");
+              this.msg=a;
+           }
+       }
+
+   });*/
+
+
+</script>
+</html> 

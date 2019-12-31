@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>快速入门</title>
+    <script src="js/vuejs-2.5.16.js"></script>
+</head>
+<body>
+<div id="app">
+    {{message}}<!--Vue的插值表达式，把data中定义的数据显示到此处，可看成是赋值的部分-->
+</div>
+</body>
+<script>
+    //view model
+    new Vue({  //可看成是逻辑处理的部分
+        el: "#app",//表示由vue 接管id为app的区域
+        data: {
+            message: "Hello 姑娘" // 注意此处不要加分号
+        }
+    });
+   /* var elementById = document.getElementById("app");
+    elementById.innerHTML="Hello 姑娘 加个微信";*/
+
+</script>
+</html>
